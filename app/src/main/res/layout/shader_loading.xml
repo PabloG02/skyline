@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/game_icon_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/icon"
+        android:focusable="false"
+        tools:src="@drawable/default_icon"
+        android:foreground="#99000000"
+        android:foregroundTintMode="src_atop"
+        android:scaleType="centerCrop" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" >
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/game_icon"
+            android:layout_width="225dp"
+            android:layout_height="225dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/icon"
+            android:layout_marginEnd="16dp"
+            android:focusable="false"
+
+            app:shapeAppearance="?attr/shapeAppearanceMediumComponent"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline3"
+
+            tools:src="@drawable/default_icon" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guideline33"
+            app:layout_constraintStart_toEndOf="@id/guideline3" >
+
+            <TextView
+                android:id="@+id/game_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="viewStart"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textColor="@android:color/background_light"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif-medium"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Cadence of Hyrule: Crypt of the NecroDancer Featuring The Legend of Zelda" />
+
+            <TextView
+                android:id="@+id/game_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItemSecondary"
+                android:textColor="@android:color/background_light"
+                android:textSize="12sp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="@id/game_title"
+                app:layout_constraintTop_toBottomOf="@id/game_title"
+                android:text="1.0.0" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintTop_toTopOf="@id/guideline4"
+            app:layout_constraintStart_toEndOf="@id/guideline3" >
+
+            <TextView
+                android:id="@+id/shaders_compiling"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="viewStart"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textColor="@android:color/background_light"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Compiling cached shaders..." />
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progress_bar"
+                android:layout_width="0dp"
+                android:layout_height="15dp"
+                app:trackCornerRadius="16dp"
+                android:layout_marginTop="10dp"
+                android:scaleY="2"
+                app:layout_constraintEnd_toEndOf="@+id/shaders_compiling"
+                app:layout_constraintStart_toStartOf="@id/shaders_compiling"
+                app:layout_constraintTop_toBottomOf="@id/shaders_compiling" />
+
+            <TextView
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="viewStart"
+                android:textAppearance="?android:attr/textAppearanceListItem"
+                android:textColor="@android:color/background_light"
+                android:textSize="12sp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@id/progress_bar"
+                app:layout_constraintTop_toBottomOf="@id/progress_bar"
+                tools:text="735/1337 (55%)" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.45" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.85" />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.47" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

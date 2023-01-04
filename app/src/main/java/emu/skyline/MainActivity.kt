@@ -141,7 +141,7 @@ class MainActivity : AppCompatActivity() {
         loadRoms(!appSettings.refreshRequired)
 
         binding.searchBar.apply {
-            binding.logIcon.setOnClickListener {
+            /*binding.logIcon.setOnClickListener {
                 val file = DocumentFile.fromSingleUri(this@MainActivity, DocumentsContract.buildDocumentUri(DocumentsProvider.AUTHORITY, "${DocumentsProvider.ROOT_ID}/logs/emulation.sklog"))!!
                 if (file.exists() && file.length() != 0L) {
                     val intent = Intent(Intent.ACTION_SEND)
@@ -152,7 +152,8 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     Snackbar.make(this@MainActivity.findViewById(android.R.id.content), getString(R.string.logs_not_found), Snackbar.LENGTH_SHORT).show()
                 }
-            }
+            }*/
+            binding.logIcon.setOnClickListener { settingsCallback.launch(Intent(context, ShaderCompilation::class.java)) }
             binding.settingsIcon.setOnClickListener { settingsCallback.launch(Intent(context, SettingsActivity::class.java)) }
             binding.refreshIcon.setOnClickListener { loadRoms(false) }
             addTextChangedListener(afterTextChanged = { editable ->
