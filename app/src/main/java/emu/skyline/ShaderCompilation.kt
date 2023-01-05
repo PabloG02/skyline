@@ -5,15 +5,19 @@
 
 package emu.skyline
 
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.Paint
 import android.graphics.RenderEffect
 import android.graphics.Shader
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.renderscript.Allocation
+import android.renderscript.Element
+import android.renderscript.RenderScript
+import android.renderscript.ScriptIntrinsicBlur
 import android.view.WindowInsets
 import android.view.WindowInsetsController
 import android.view.WindowManager
@@ -55,8 +59,20 @@ class ShaderCompilation : AppCompatActivity() {
 
         binding.gameIcon.setImageBitmap(image)
         binding.gameIconBg.setImageBitmap(gameData.icon)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             binding.gameIconBg.setRenderEffect(RenderEffect.createBlurEffect(85F, 85F, Shader.TileMode.MIRROR))
+        } else {
+            val blurredIcon = gameData.icon?.let { Bitmap.createBitmap(it) }
+            val rs = RenderScript.create(applicationContext)
+            val input = Allocation.createFromBitmap(rs, blurredIcon, Allocation.MipmapControl.MIPMAP_NONE, Allocation.USAGE_SCRIPT)
+            val output = Allocation.createTyped(rs, input.getType())
+            val script = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs))
+            script.setRadius(15F)
+            script.setInput(input)
+            script.forEach(output)
+            output.copyTo(blurredIcon)
+            binding.gameIconBg.setImageBitmap(blurredIcon)
+        }
 
         //binding.gameTitle.text = "Cadence of Hyrule: Crypt of the NecroDancer Featuring The Legend of Zelda"
         binding.gameTitle.text = gameData.title

@@ -12,7 +12,7 @@
         android:contentDescription="@string/icon"
         android:focusable="false"
         tools:src="@drawable/default_icon"
-        android:foreground="#99000000"
+        android:foreground="#A6000000"
         android:foregroundTintMode="src_atop"
         android:scaleType="centerCrop" />
 
