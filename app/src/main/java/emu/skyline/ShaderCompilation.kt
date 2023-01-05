@@ -11,6 +11,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RenderEffect
 import android.graphics.Shader
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowInsets
@@ -26,7 +27,7 @@ import emu.skyline.databinding.ShaderLoadingBinding
 
 class ShaderCompilation : AppCompatActivity() {
     private val binding by lazy { ShaderLoadingBinding.inflate(layoutInflater) }
-    private val missingIcon by lazy { ContextCompat.getDrawable(this, R.drawable.cript)!!.toBitmap(1024, 1024) }
+    private val missingIcon by lazy { ContextCompat.getDrawable(this, R.drawable.default_icon)!!.toBitmap(1024, 1024) }
     override fun onCreate(savedInstanceState : Bundle?) {
         super.onCreate(savedInstanceState)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
@@ -34,10 +35,12 @@ class ShaderCompilation : AppCompatActivity() {
 
         val gameData = intent.getSerializableExtra("gameData") as AppItem
 
-        window.setDecorFitsSystemWindows(false)
-        window.insetsController?.let {
-            it.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-            it.hide(WindowInsets.Type.systemBars())
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.setDecorFitsSystemWindows(false)
+            window.insetsController?.let {
+                it.systemBarsBehavior = WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                it.hide(WindowInsets.Type.systemBars())
+            }
         }
         window.attributes.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
 
@@ -52,7 +55,8 @@ class ShaderCompilation : AppCompatActivity() {
 
         binding.gameIcon.setImageBitmap(image)
         binding.gameIconBg.setImageBitmap(gameData.icon)
-        binding.gameIconBg.setRenderEffect(RenderEffect.createBlurEffect(85F, 85F, Shader.TileMode.MIRROR))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+            binding.gameIconBg.setRenderEffect(RenderEffect.createBlurEffect(85F, 85F, Shader.TileMode.MIRROR))
 
         //binding.gameTitle.text = "Cadence of Hyrule: Crypt of the NecroDancer Featuring The Legend of Zelda"
         binding.gameTitle.text = gameData.title
