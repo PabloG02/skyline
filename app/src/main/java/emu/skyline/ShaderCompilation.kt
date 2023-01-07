@@ -5,12 +5,12 @@
 
 package emu.skyline
 
-import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.RenderEffect
 import android.graphics.Shader
+import android.graphics.drawable.BitmapDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -48,6 +48,7 @@ class ShaderCompilation : AppCompatActivity() {
         }
         window.attributes.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
 
+        // Upscale game icon
         val image = Bitmap.createBitmap(512, 512, Bitmap.Config.RGB_565)
         val canvas = image?.let { Canvas(it) }
         val paint = AndroidPaint()
@@ -55,11 +56,10 @@ class ShaderCompilation : AppCompatActivity() {
         paint.isAntiAlias = true
         canvas?.scale(2f,2f)
         gameData.icon?.let { canvas?.drawBitmap(it, 0F, 0F, paint.asFrameworkPaint()) }
-        // Remove bitmap from memory      image.recycle()
 
         binding.gameIcon.setImageBitmap(image)
-        binding.gameIconBg.setImageBitmap(gameData.icon)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            binding.gameIconBg.setImageBitmap(gameData.icon)
             binding.gameIconBg.setRenderEffect(RenderEffect.createBlurEffect(85F, 85F, Shader.TileMode.MIRROR))
         } else {
             val blurredIcon = gameData.icon?.let { Bitmap.createBitmap(it) }
@@ -74,7 +74,6 @@ class ShaderCompilation : AppCompatActivity() {
             binding.gameIconBg.setImageBitmap(blurredIcon)
         }
 
-        //binding.gameTitle.text = "Cadence of Hyrule: Crypt of the NecroDancer Featuring The Legend of Zelda"
         binding.gameTitle.text = gameData.title
         binding.gameTitle.isSelected = true
         binding.gameVersion.text = gameData.version
@@ -100,5 +99,12 @@ class ShaderCompilation : AppCompatActivity() {
                 }
             }
         }).start()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        (binding.gameIcon.drawable as BitmapDrawable).bitmap.recycle()
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S)
+            (binding.gameIconBg.drawable as BitmapDrawable).bitmap.recycle()
     }
 }

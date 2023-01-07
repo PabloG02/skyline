@@ -19,24 +19,32 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:clipToPadding="false"
         android:layout_gravity="center" >
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/game_icon"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/item_card"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:contentDescription="@string/icon"
             android:layout_marginEnd="16dp"
-            android:focusable="false"
-
-            app:shapeAppearance="?attr/shapeAppearanceMediumComponent"
+            app:cardCornerRadius="@dimen/cornerRadiusMedium"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="#00000000"
 
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/guideline3"
+            app:layout_constraintEnd_toEndOf="@id/guideline3" >
 
-            tools:src="@drawable/default_icon" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/game_icon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/icon"
+                android:focusable="false"
 
+                tools:src="@drawable/default_icon" />
+        </com.google.android.material.card.MaterialCardView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
