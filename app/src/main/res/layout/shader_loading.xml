@@ -65,7 +65,7 @@
                 android:ellipsize="marquee"
                 android:singleLine="true"
                 android:textAlignment="viewStart"
-                android:textColor="@android:color/background_light"
+                android:textColor="@android:color/white"
                 android:textSize="20sp"
                 tools:text="The Legend of Zelda: Breath of the Wild" />
 
@@ -75,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:textColor="@android:color/background_light"
+                android:textColor="@android:color/white"
                 tools:text="1.0.0" />
         </LinearLayout>
 
@@ -95,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Compiling cached shaders..."
-                android:textColor="@android:color/background_light"
+                android:textColor="@android:color/white"
                 android:textSize="17sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -103,18 +103,18 @@
             <com.google.android.material.progressindicator.LinearProgressIndicator
                 android:id="@+id/progress_bar"
                 android:layout_width="match_parent"
-                android:layout_height="15dp"
-                android:layout_marginTop="10dp"
-                android:scaleY="2.5"
-                app:trackCornerRadius="16dp" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                app:trackCornerRadius="4dp"
+                app:trackThickness="10dp" />
 
             <TextView
                 android:id="@+id/progress"
                 style="?attr/textAppearanceBodyMedium"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textColor="@android:color/background_light"
+                android:layout_marginTop="7dp"
+                android:textColor="@android:color/white"
                 tools:text="735/1337 (55%)" />
 
         </LinearLayout>
