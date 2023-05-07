@@ -55,6 +55,7 @@ class EmulationSettings private constructor(context : Context, prefName : String
     var enableFastGpuReadbackHack by sharedPreferences(context, false, prefName = prefName)
     var enableFastReadbackWrites by sharedPreferences(context, false, prefName = prefName)
     var disableSubgroupShuffle by sharedPreferences(context, false, prefName = prefName)
+    var enableGetVaRegions by sharedPreferences(context, true, prefName = prefName)
 
     // Debug
     var validationLayer by sharedPreferences(context, false, prefName = prefName)
